@@ -7,13 +7,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @*<base href="./">*@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <meta name="description" content="WBTBCL" />
-    <meta name="author" content="WBTBCL" />
-    <meta name="keyword" content="WBTBCL" />
+    <meta name="description" content="Kalyani Book Store" />
+    <meta name="author" content="Kalyani Book Store" />
+    <meta name="keyword" content="Kalyani Book Store, Books, City Store" />
     <title>@(ViewBag.Title) | @(ConfigurationManager.AppSettings["titlebarName"])</title>
     <link href="@(Url.VersionedContent("~/icons/coreui-icons.min.css"))" rel="stylesheet" />
     <link href=@Url.VersionedContent("~/icons/flag-icon.min.css") rel="stylesheet" />
@@ -28,12 +27,12 @@
             <div class="col-md-8">
                 <div class="card-group">
                     <div class="card p-4">
-                        <div class="card-body" style=" color:#20a8d8;">
-                            <h3 style="text-align:center">Madrasah Book Requisition for Academic Year 2025 </h3>
+                        <div class="card-body" style="color:#20a8d8;">
+                            <h3 style="text-align:center">Kalyani Book Store Requisition System</h3>
                             <div>&nbsp;</div>
-                            <h4 style="text-align:center">Book requisition quantity must be as par with student enrolment quantity on Banglar Siksha Portal for the Academic Year 2024 </h4>
+                            <h4 style="text-align:center">Request books according to your needs</h4>
                             <div>&nbsp;</div>
-                            <h5 style="text-align:center">DIRECTORATE OF MADRASAH EDUCATION</h5>
+                            <h5 style="text-align:center">KALYANI BOOK STORE</h5>
                             <br />
 
                             <h4><b>Login</b></h4>
@@ -43,20 +42,9 @@
                                         <i class="icon-user"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="text" placeholder="Udise Code" id="USER_ID">
+                                <input class="form-control" type="text" placeholder="Username" id="USER_ID">
                             </div>
 
-                            <!-- For Normal Login -->
-                            @*<div class="input-group mb-4">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="icon-lock"></i>
-                                        </span>
-                                    </div>
-                                    <input class="form-control" type="password" placeholder="Password" id="PASSWORD">
-                                </div>*@
-
-                            <!-- For OTP Login -->
                             <div class="input-group mb-4" style="display:none;" id="PasswordDiv">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -66,8 +54,6 @@
                                 <input class="form-control" type="password" placeholder="Password" id="PASSWORD">
                             </div>
                             <div class="row">
-
-                                <!-- For OTP Login -->
                                 <div class="col-6" id="OTPDiv">
                                     <button class="btn btn-primary px-4" type="button" id="btnLoginOtp">Send OTP</button>
                                 </div>
@@ -76,10 +62,6 @@
                                 </div>
                                 <br><br>
 
-                                <!-- For Normal Login -->
-                                @*<div class="col-6">
-                                        <button class="btn btn-primary px-4" type="button" id="btnLogin">Login</button>
-                                    </div>*@
                                 <div class="col-12" id="UserReg">
                                     <button class="btn btn-success px-4" type="button" id="btnUserReg">New User Registration</button>
                                 </div>
@@ -98,20 +80,16 @@
                     <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
                         <div class="card-body text-center">
                             <div>
-                                <h2>Attention! সতর্কবার্তা!</h2>
-                                <p style="color:#dcffa5;">After first Login, you have to update your profile details with mobile number (it is mandatory).
-                                <p style="color:#dcffa5;">প্রথম লগইন করার পর নিজের প্রোফাইল বিবরণ পরিবর্তন করুন মোবাইল নম্বরের সাথে (এটা বাধ্যতামূলক)</p>
+                                <h2>Welcome Everyone!!</h2>
+                                <p style="color:#dcffa5;">We, at Kalyani Book Store welcome you all to the magical gateway of infinite knowledge.</p>
+                                <p style="color:#dcffa5;">Feel free to ask anyone about anything that interests you to any extent.</p>
                                 <p style="color:#dcffa5;">
-                                    Server Maintenance Time: 8 AM - 9 AM (Daily)
-                                    Email Id: wbmadrasah@saraswatypress.in
-                                    <br><br>
-                                    <b>Helpline No:</b> <br />
-                                    Any query, you may call our Help-line number 18008908011
+                                    Store Open Timings: 9 AM - 9 PM (Daily)<br>
+                                    Email Id: support@kalyanibookstore.com<br>
+                                    <b>Helpline No:</b> 1800-123-4567
                                 </p>
                                 <div>&nbsp;<br /></div>
-                                @*<p class="blink-image" style="color:#9a0032;font-size:large;"><b>Requisition Closing Date for <br>Pre-Primary to Class-X AY 2020 is 30/06/19</b></p>*@
-                                <div>&nbsp;<br /></div>
-                                <p style="color:#dcffa5;text-align:center;">Version 6.0.0</p>
+                                <p style="color:#dcffa5;text-align:center;">Version 1.0.0</p>
                             </div>
                         </div>
                     </div>
@@ -141,76 +119,48 @@
 
         $(document).ready(function () {
             document.oncontextmenu = function () { return false; }
-
         });
 
         $(document).off("click", "#btnUserReg").on("click", "#btnUserReg", function (e) {
-
             window.location.href = "@Url.Action("Index", "Registration", new { area = "" })";
         });
 
         $(document).off("click", "#btnLogin").on("click", "#btnLogin", function (e) {
-
-            if ($("#USER_ID").val().trim() == '' || $("#PASSWORD").val().trim() == '' ) {
+            if ($("#USER_ID").val().trim() == '' || $("#PASSWORD").val().trim() == '') {
                 alert('Please fill all the details.');
-            }
-            else {
-
+            } else {
                 $.ajax({
                     url: '@Url.Action("Validate", "Login", new { area = "" })',
                     type: 'GET',
                     data: { username: $("#USER_ID").val().trim(), password: $("#PASSWORD").val().trim()}
                 }).done(function (data) {
-
                     if (data.Success == 1) {
-                       // alert(data.UserType);
-                        if (data.UserType == 1) // school
-                            {
-                                window.location.href = "@Url.Action("Index", "InstituteProfile", new { area = "" })";
-                            }
-                        else if (data.UserType == 2) // directorate
-                            {
-                                window.location.href = "@Url.Action("Index", "UserProfile", new { area = "" })";
-                            }
-                        else if (data.UserType == 3 || data.UserType == 4) // TB user
-                        {
+                        if (data.UserType == 1) {
+                            window.location.href = "@Url.Action("Index", "InstituteProfile", new { area = "" })";
+                        } else if (data.UserType == 2) {
+                            window.location.href = "@Url.Action("Index", "UserProfile", new { area = "" })";
+                        } else if (data.UserType == 3 || data.UserType == 4) {
                             window.location.href = "@Url.Action("Index", "UserProfile", new { area = "" })";
                         }
-                        // localStorage.setItem("UNAME", $("#USER_ID").val());
-
-                       // window.location.href = "@Url.Action("Index", "InstituteProfile", new { area = "" })";
-
-                    }
-                    else {
+                    } else {
                         alert(data.Message);
                     }
                 });
-
             }
-
-
         });
 
         $(document).off("click", "#btnLoginOtp").on("click", "#btnLoginOtp", function (e) {
             if ($("#USER_ID").val().trim() == "") {
                 DeviceAlert("Please fill Username", alertType.warning);
-            }
-            else {
+            } else {
                 $.ajax({
                     url: '@Url.Action("GetLoginOTP", "Login", new { area = "" })',
                     type: 'GET',
                     data: { username: $("#USER_ID").val().trim() }
                 }).done(function (data) {
-
-                    @*localStorage.setItem("UNAME", $("#username").val().trim());
-                    DeviceAlert(data.Message, alertType.success, "@Url.Action("Index", "ResetPassword", new { area = "" })");*@
-
-                    if (data.Message == "User doesn't exist!" || data.Message == "Mobile number not found" || data.Message == "OTP Failed")
-                    {
+                    if (data.Message == "User doesn't exist!" || data.Message == "Mobile number not found" || data.Message == "OTP Failed") {
                         DeviceAlert(data.Message, alertType.error);
-                    }
-                    else
-                    {
+                    } else {
                         DeviceAlert(data.Message, alertType.success);
                         $("#USER_ID").prop('disabled', true);
                         $("#PASSWORD").val('');
@@ -218,17 +168,12 @@
                         $("#OTPDiv").hide();
                         $("#LoginDiv").show();
                         $("#UserReg").hide();
-
                     }
-
-        });
-        }
-
+                });
+            }
         });
 
     </script>
 
 </body>
 </html>
-
-
