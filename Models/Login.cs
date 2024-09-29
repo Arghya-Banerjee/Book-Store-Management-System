@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Tutorial1.Models
-{
-    public class Login
+
+    public class Login // institute login
     {
         public long Id { get; set; }
         public string RefId { get; set; }
@@ -16,7 +15,8 @@ namespace Tutorial1.Models
         public string UserId { get; set; }
         public string UserPassword { get; set; }
         public int UserType { get; set; }
-        public int ReqActive { get; set; }
         public int Opmode { get; set; }
+        // added 03.09.21
+        public int ReqActive { get; set; }
+        
     }
-}
