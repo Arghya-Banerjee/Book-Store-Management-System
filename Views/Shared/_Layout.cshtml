@@ -1,40 +1,111 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@using Core;
+@using Newtonsoft.Json;
+@using System.Configuration;
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    @*<base href="./" />*@
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <meta name="description" content="WBTBCL" />
+    <meta name="author" content="WBTBCL">
+    <meta name="keyword" content="WBTBCL" />
+    <title>@(ViewBag.Title) | @(ConfigurationManager.AppSettings["titlebarName"])</title>
+    <link href="@(Url.VersionedContent("~/icons/coreui-icons.min.css"))" rel="stylesheet" />
+    <link href="@(Url.VersionedContent("~/icons/flag-icon.min.css"))" rel="stylesheet" />
+    <link href="@(Url.VersionedContent("~/icons/font-awesome.min.css"))" rel="stylesheet" />
+    <link href="@(Url.VersionedContent("~/icons/simple-line-icons.css"))" rel="stylesheet" />
+    <link href="@(Url.VersionedContent("~/css/style.css"))" rel="stylesheet" />
+    <link href="@(Url.VersionedContent("~/css/select2.min.css"))" rel="stylesheet" />
+    @*<link href="@(Url.VersionedContent("//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"))" rel="stylesheet" />*@
+    <link href="@(Url.VersionedContent("~/css/jquery-ui.css"))" rel="stylesheet" />
+    <link href="@(Url.VersionedContent("~/vendors/pace-progress/css/pace.min.css"))" rel="stylesheet" />
+
+    @RenderSection("csslib", required: false)
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+    <header class="app-header navbar">
+        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href=javascript:void(0);>
+            @*<img class="navbar-brand-full" src="~/img/book-logo.svg" width="89" height="25" alt="Logo">
+            <img class="navbar-brand-minimized" src="~/img/book-logo.svg" width="30" height="30" alt="Logo">*@
+        </a>
+        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+       
+            @*<h5 style="color:#152171;">Madrasah</h5>*@
+        <h5 style="color:#152171;">Madrasah Book Distribution</h5>
+        <ul class="nav navbar-nav ml-auto">
+           
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href=javascript:void(0); role="button" aria-haspopup="true" aria-expanded="false">
+                    <img class="img-avatar" src="@(Url.VersionedContent("~/img/usericon.png"))" alt="User" />
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+
+                    <div class="dropdown-header text-center">
+                        <strong>Settings</strong>
+                    </div>
+                        @if (GlobalSettings.oUserMaster.vUserRole == UserRole.SCHOOL)
+                        {
+                            <a class="dropdown-item" href="@(Url.Action("Index", "InstituteProfile", new { area = "" }))">
+                                <i class="fa fa-user"></i> Profile
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="dropdown-item" href="@(Url.Action("Index", "UserProfile", new { area = "" }))">
+                                <i class="fa fa-user"></i> Profile
+                            </a>
+                        }
+                        
+                  
+                        @*<a class="dropdown-item" href="@(Url.Action("ChangePassword", "ResetPassword", new { area = "" }))">
+                            <i class="fa fa-user"></i> Change Password
+                        </a>*@
+
+                        <a class="dropdown-item" href="@(Url.Action("Logout", "Login", new { area = "" }))">
+                            <i class="fa fa-lock"></i> Logout
+                        </a>
+                </div>
+            </li>
+        </ul>
+    </header>
+    <div class="app-body">
+        @{ Html.RenderPartial("~/Views/Shared/_Menu.cshtml"); }
+        <main class="main">
+            @{ Html.RenderPartial("~/Views/Shared/_BCrumb.cshtml"); }
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="app-footer">
+        <div>
+            <span>&copy; @DateTime.Now.Year.ToString() @(ConfigurationManager.AppSettings["ShortCompanyCode"])</span>
         </div>
-    </div>
+    </footer>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    <script src="@(Url.VersionedContent("~/vendors/js/jquery-3.2.1.min.js"))"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/jquery-ui.js"))"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/popper.min.js"))"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/bootstrap.min.js"))"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/jquery.blockUI.js"))"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/sweetalert.min.js"))"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/select2.min.js"))"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/common.js"))"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/pace.min.js"))"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/perfect-scrollbar.min.js"))"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/coreui.js"))"></script>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/moment-with-locales.min.js"))"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/tableExport.js"))"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/jquery.base64.js"))"></script>
+    <script src="@(Url.VersionedContent("~/vendors/js/html2canvas.js"))"></script>
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>

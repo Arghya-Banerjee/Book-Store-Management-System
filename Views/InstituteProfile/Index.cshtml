@@ -1,0 +1,507 @@
+﻿@model InstituteProfile
+@{
+    ViewBag.Title = "Institute Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Institute Profile</strong>&nbsp;
+                        @*<small>Form</small>*@
+                       
+                    </div>
+                    <input type="hidden" id="hdnDistrictId" value="@Model.DistrictId"/>
+                    <input type="hidden" id="hdnBlockId" value="@Model.BlockId" />
+                    <input type="hidden" id="hdnSchoolMedium" value="@Model.SchoolMedium" />
+                    <div class="card-body">
+
+                        @*<div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>District Name</label>
+                                        <input class="form-control" id="DIstrictName" value="@GlobalSettings.oUserMaster.USER_ID" disabled>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <!-- /.row-->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="ccnumber">Dise Code </label>
+                                    <input class="form-control" id="UdiseCode" value="@Model.UdiseCode" disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row-->
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="ccnumber">Institute Name </label>
+                                    <input class="form-control" id="InstituName" value="@Model.InstituName" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="MobileNo">Primary Mobile No<strong style="color:red">*</strong></label>
+                                    <input class="form-control" id="MobileNo" value="@Model.MobileNo" maxlength="10" onkeypress="validate_numeric(event);" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="MobileNo">Alternate Mobile No</label>
+                                    <input class="form-control" id="MobileNoAlt" value="@Model.MobileNoAlt" maxlength="10" onkeypress="validate_numeric(event);" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="ccnumber">Email Id</label>
+                                    <input class="form-control" id="Email" value="@Model.Email" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Institute Address <strong style="color:red">*</strong></label>
+                            <textarea class="form-control" id="InstituteAddress">@Model.InstituteAddress</textarea>
+
+                        </div>
+                       
+                        <div class="form-group">
+                            <label>Pin Code <strong style="color:red">*</strong></label>
+                            <input type="text" class="form-control" id="InstitutePin" maxlength="6" onkeypress="validate_numeric(event)" value="@Model.InstitutePin" />
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>District Name<strong style="color:red">*</strong></label>
+                            <select id="ddlDistrict" class="form-control" disabled></select>
+                        </div>
+
+                        @if(Model.IsActive>0)
+                        {
+                            <div class="form-group">
+                                <label>Block Name<strong style="color:red">*</strong></label>
+                                <select id="ddlBlock" class="form-control" disabled></select>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <label>Block Name<strong style="color:red">*</strong></label>
+                                <select id="ddlBlock" class="form-control" ></select>
+
+                            </div>
+                        }
+
+                        @if (ViewBag.REQCOUNT > 0)
+                        {
+                             <div class="form-group">
+                                <label>Institute Medium <strong style="color:red">*</strong></label>
+                                <select id="ddlMedium" class="form-control" disabled></select>
+
+                            </div>
+                            
+                        }
+                        else
+                        {
+                             <div class="form-group">
+                                <label>Institute Medium <strong style="color:red">*</strong></label>
+                                <select id="ddlMedium" class="form-control"></select>
+                            </div>
+                        }
+                       
+                       
+                        @*<div class="form-group">
+
+                            <div class="form-check checkbox">
+                                <label>
+                                    <input class="form-check-input" type="checkbox" @(GlobalSettings.oUserMaster.IsActive == 1 ? "Checked" : "") id="IsActive" />
+                                    Profile Active <strong style="color:red">*</strong>
+                                </label>
+                            </div>
+
+                        </div>*@
+                        <!-- /.row-->
+                    </div>
+                    <div class="card-footer">
+                        @if(Model.IsActive==0)
+                        {
+                            <button class="btn btn-sm btn-primary" type="submit" id="btnSubmit">
+                                <i class="fa fa-dot-circle-o"></i> Save
+                            </button>
+                            <button class="btn btn-sm btn-success" type="submit" id="btnSubmitConfirm">
+                                <i class="fa fa-dot-circle-o"></i> Save & Confirm
+                            </button>
+                        }
+                        @if (Model.IsActive == 1)
+                        {
+                            <button class="btn btn-sm btn-success" type="submit" id="btnUpdate">
+                                <i class="fa fa-dot-circle-o"></i> Update
+                            </button>
+                        }
+
+                        <button class="btn btn-sm btn-danger" type="reset" id="btnReset">
+                            <i class="fa fa-ban"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.col-->
+            <!-- /.col-->
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script>
+    $(function () {
+        document.oncontextmenu = function () { return false; }
+        LoadDistrict();
+    });
+    $(document).off("click", "#btnReset").on("click", "#btnReset", function (e) {
+        window.location.href = "@Url.Action("Index", "InstituteProfile", new { area = "" })";
+    });
+
+        function LoadDistrict()
+        {
+                $.ajax({
+                    url: "@Url.Action("GetAllDistrict", "Login", new { area = "" })",
+                    type: "GET"
+               
+            }).done(function (data) {
+                try {
+                    if (data.Success > 0) {
+                        var jsonData = data.Message;
+                        if (jsonData.length > 0) {
+
+                            $("#ddlDistrict").html('');
+
+                            var $select = $("#ddlDistrict");
+
+                            $select.append('<option value="">-- Select District --</option>');
+
+                            for (var i = 0; i < jsonData.length; i++) {
+                                var obj = jsonData[i];
+                                $select.append($("<option />", { value: obj.Id, text: obj.District }));
+                            }
+                        }
+                   
+                    }
+                } catch (ex) { }
+            }).always(function (data) {
+                $("#ddlDistrict").select2({
+                    placeholder: "Select District",
+                    theme: "classic"
+                });
+                
+                $("#ddlDistrict").val($("#hdnDistrictId").val());
+                $("#ddlDistrict").change();
+
+            });
+            LoadBlock($("#hdnDistrictId").val())
+
+        }
+
+        function LoadBlock(districtid)
+        {
+            $.ajax({
+                url: "@Url.Action("GetAllBlock", "Login", new { area = "" })",
+                type: "GET",
+                data: {districtid:districtid}
+               
+        }).done(function (data) {
+            try {
+                if (data.Success > 0) {
+                    var jsonData = data.Message;
+                    if (jsonData.length > 0) {
+
+                        $("#ddlBlock").html('');
+
+                        var $select = $("#ddlBlock");
+
+                        $select.append('<option value="">-- Select Block --</option>');
+
+                        for (var i = 0; i < jsonData.length; i++) {
+                            var obj = jsonData[i];
+                            $select.append($("<option />", { value: obj.Id, text: obj.BlockName }));
+                        }
+                    }
+                   
+                }
+            } catch (ex) { }
+        }).always(function (data) {
+            $("#ddlBlock").select2({
+                placeholder: "Select Block",
+                theme: "classic"
+            });
+            
+            if ($("#hdnBlockId").val()*1 > 0)
+            {
+                $("#ddlBlock").val($("#hdnBlockId").val());
+                $("#ddlBlock").change();
+            }
+            
+            loadMedium();
+        });
+        
+
+        }
+
+        function loadMedium() {
+            $("#ddlMedium").html('');
+            $.ajax({
+                url: "@Url.Action("GetMedium", "Requisition", new { area = "" })",
+                type: "GET"
+
+
+        }).done(function (data) {
+            try {
+                if (data.Success > 0) {
+
+                    var jsonData = data.Message;
+                    if (jsonData.length > 0) {
+
+                        $("#ddlMedium").html('');
+
+                        var $select = $("#ddlMedium");
+
+                        $select.append('<option value="">-- Select Medium--</option>');
+
+                        for (var i = 0; i < jsonData.length; i++) {
+                            var obj = jsonData[i];
+                            $select.append($("<option />", { value: obj.Id, text: obj.Medium }));
+                        }
+                    }
+                }
+            } catch (ex) { }
+        }).always(function (data) {
+            $("#ddlMedium").select2({
+                placeholder: "Select Medium",
+                theme: "classic"
+            });
+            $("#ddlMedium").show();
+
+            if ($("#hdnSchoolMedium").val() * 1 > 0) {
+                $("#ddlMedium").val($("#hdnSchoolMedium").val());
+                $("#ddlMedium").change();
+            }
+
+        });
+        }
+
+    $(document).off("click", "#btnSubmit").on("click", "#btnSubmit", function (e) {
+        //debugger;
+       // var ischecked = $("#IsActive").is(':checked');
+        var jsonData = new Object();
+
+        jsonData.InstituteAddress = ($("#InstituteAddress").val().trim());
+        jsonData.InstitutePin = ($("#InstitutePin").val().trim());
+        jsonData.BlockId = ($("#ddlBlock").val().trim());
+        jsonData.MobileNo = ($("#MobileNo").val().trim());
+        jsonData.MobileNoAlt = ($("#MobileNoAlt").val().trim());
+        jsonData.Email = ($("#Email").val().trim());
+        jsonData.SchoolMedium = ($("#ddlMedium").val() * 1);
+       
+        //if (ischecked == true)
+        //{
+        //    jsonData.IsActive = 1;
+        //}
+        //else {
+        //    jsonData.IsActive = 0;
+        //}
+
+        var emailchk = emailvalidate($("#Email").val().trim());
+
+
+        if ($("#InstituteAddress").val().trim() == "" || $("#InstitutePin").val().trim() == "" || $("#ddlBlock").val()*1 == "" || $("#MobileNo").val().trim() == ""
+             || $("#ddlMedium").val() * 1=="") {
+            DeviceAlert("Please fill all details", alertType.warning);
+        }
+        else if ($("#Email").val().trim()!='' && emailchk == false) {
+            DeviceAlert("Please give proper Email Id", alertType.warning);
+        }
+        else if ($("#MobileNo").val().trim().length != 10) {
+            DeviceAlert("Please give proper Mobile No", alertType.warning);
+        }
+        else if ($("#InstitutePin").val().trim().length != 6) {
+            DeviceAlert("Please give proper Pin Code", alertType.warning);
+        }
+        else if ($("#MobileNoAlt").val().trim() != "" && $("#MobileNoAlt").val().trim().length != 10) {
+            DeviceAlert("Please give proper Alternate Mobile No", alertType.warning);
+        }
+        
+
+        else {
+            $("#btnSubmit").prop("disabled", true);
+
+            $.ajax({
+                url: "@Url.Action("UpdateInstituteProfile", "InstituteProfile", new { area = "" })",
+                type: "POST",
+            data: JSON.stringify(jsonData),
+            contentType: "application/json"
+
+        }).done(function (data) {
+
+            if (data.Success > 0) {
+
+                DeviceAlert(data.Message, alertType.success, "@Url.Action("Index", "InstituteProfile", new { area = "" })");
+
+            }
+            else {
+                DeviceAlert(data.Message, alertType.error);
+            }
+        }).always(function (data) {
+            $("#btnSubmit").prop("disabled", false);
+        });
+
+    }
+
+    });
+
+        $(document).off("click", "#btnSubmitConfirm").on("click", "#btnSubmitConfirm", function (e) {
+            //debugger;
+            // var ischecked = $("#IsActive").is(':checked');
+            var jsonData = new Object();
+
+            jsonData.InstituteAddress = ($("#InstituteAddress").val().trim());
+            jsonData.InstitutePin = ($("#InstitutePin").val().trim());
+            jsonData.BlockId = ($("#ddlBlock").val().trim());
+            jsonData.MobileNo = ($("#MobileNo").val().trim());
+            jsonData.MobileNoAlt = ($("#MobileNoAlt").val().trim());
+            jsonData.Email = ($("#Email").val().trim());
+            jsonData.SchoolMedium = ($("#ddlMedium").val() * 1);
+            jsonData.IsActive = 1; // IsActive will be considered as confirm profile 
+       
+            //if (ischecked == true)
+            //{
+            //    jsonData.IsActive = 1;
+            //}
+            //else {
+            //    jsonData.IsActive = 0;
+            //}
+
+            var emailchk = emailvalidate($("#Email").val().trim());
+
+            var r = confirm("After confirmation, you can't change the Block of Institute Profile.Do You want to continue?");
+
+            if (r == true) {
+
+                if ($("#InstituteAddress").val().trim() == "" || $("#InstitutePin").val().trim() == "" || $("#ddlBlock").val()*1 == "" || $("#MobileNo").val().trim() == ""|| $("#ddlMedium").val() * 1=="") {
+                        DeviceAlert("Please fill all details", alertType.warning);
+                    }
+                    else if (emailchk == false) {
+                        DeviceAlert("Please give proper Email Id", alertType.warning);
+                    }
+                    else if ($("#MobileNo").val().trim().length != 10) {
+                        DeviceAlert("Please give proper Mobile No", alertType.warning);
+                    }
+                    else if ($("#InstitutePin").val().trim().length != 6) {
+                        DeviceAlert("Please give proper Pin Code", alertType.warning);
+                    }
+                    else if ($("#MobileNoAlt").val().trim() != "" && $("#MobileNoAlt").val().trim().length != 10) {
+                        DeviceAlert("Please give proper Alternate Mobile No", alertType.warning);
+                    }
+            
+                    else {
+                        $("#btnSubmit").prop("disabled", true);
+
+                        $.ajax({
+                            url: "@Url.Action("UpdateInstituteProfile", "InstituteProfile", new { area = "" })",
+                            type: "POST",
+                        data: JSON.stringify(jsonData),
+                        contentType: "application/json"
+
+                    }).done(function (data) {
+
+                        if (data.Success > 0) {
+
+                            DeviceAlert(data.Message, alertType.success, "@Url.Action("Index", "Requisition", new { area = "" })");
+
+                        }
+                        else {
+                            DeviceAlert(data.Message, alertType.error);
+                        }
+                    }).always(function (data) {
+                        $("#btnSubmit").prop("disabled", false);
+                    });
+
+                }
+            }
+
+        });
+
+        $(document).off("click", "#btnUpdate").on("click", "#btnUpdate", function (e) {
+            //debugger;
+            // var ischecked = $("#IsActive").is(':checked');
+            var jsonData = new Object();
+
+            jsonData.InstituteAddress = ($("#InstituteAddress").val().trim());
+            jsonData.InstitutePin = ($("#InstitutePin").val().trim());
+            jsonData.BlockId = ($("#ddlBlock").val().trim());
+            jsonData.MobileNo = ($("#MobileNo").val().trim());
+            jsonData.MobileNoAlt = ($("#MobileNoAlt").val().trim());
+            jsonData.Email = ($("#Email").val().trim());
+            jsonData.SchoolMedium = ($("#ddlMedium").val() * 1);
+            jsonData.IsActive = 1; // IsActive will be considered as confirm profile 
+            
+
+            var emailchk = emailvalidate($("#Email").val().trim());
+
+
+            if ($("#InstituteAddress").val().trim() == "" || $("#InstitutePin").val().trim() == "" || $("#ddlBlock").val()*1 == "" || $("#MobileNo").val().trim() == ""
+                 || $("#ddlMedium").val() * 1=="") {
+                DeviceAlert("Please fill all details", alertType.warning);
+            }
+            else if (emailchk == false) {
+                DeviceAlert("Please give proper Email Id", alertType.warning);
+            }
+            else if ($("#MobileNo").val().trim().length != 10) {
+                DeviceAlert("Please give proper Mobile No", alertType.warning);
+            }
+            else if ($("#InstitutePin").val().trim().length != 6) {
+                DeviceAlert("Please give proper Pin Code", alertType.warning);
+            }
+            else if ($("#MobileNoAlt").val().trim() != "" && $("#MobileNoAlt").val().trim().length != 10) {
+                DeviceAlert("Please give proper Alternate Mobile No", alertType.warning);
+            }
+        
+
+            else {
+                $("#btnSubmit").prop("disabled", true);
+
+                $.ajax({
+                    url: "@Url.Action("UpdateInstituteProfile", "InstituteProfile", new { area = "" })",
+                    type: "POST",
+                data: JSON.stringify(jsonData),
+                contentType: "application/json"
+
+            }).done(function (data) {
+
+                if (data.Success > 0) {
+
+                    DeviceAlert(data.Message, alertType.success, "@Url.Action("Index", "InstituteProfile", new { area = "" })");
+
+                }
+                else {
+                    DeviceAlert(data.Message, alertType.error);
+                }
+            }).always(function (data) {
+                $("#btnSubmit").prop("disabled", false);
+            });
+
+        }
+
+        });
+    </script>
+}

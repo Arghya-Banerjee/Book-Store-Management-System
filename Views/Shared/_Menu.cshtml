@@ -1,0 +1,229 @@
+﻿@{
+    var curController = this.ViewContext.RouteData.Values["controller"].ToString();
+    var curAction = this.ViewContext.RouteData.Values["action"].ToString();
+}
+<div class="sidebar">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+                @if (GlobalSettings.oUserMaster.vUserRole == UserRole.SCHOOL)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@(Url.Action("Index", "InstituteProfile", new { area = "" }))">
+                            <i class="nav-icon icon-speedometer"></i>Profile
+
+                        </a>
+                    </li>
+                    if(GlobalSettings.oUserMaster.ReqActive>0)
+                    {
+                        <li class="nav-item">
+                        <a class="nav-link" href="@(Url.Action("Index", "Requisition", new { area = "" }))">
+                            <i class="nav-icon icon-layers"></i>Manage Requisition
+
+                        </a>
+                      </li>
+                    }
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="@(Url.Action("Index", "UserHelp", new { area = "" }))">
+                            <i class="nav-icon icon-speedometer"></i>Help
+
+                        </a>
+                    </li>
+                }
+                @if (GlobalSettings.oUserMaster.vUserRole == UserRole.DIRECTORATE)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@(Url.Action("Index", "UserProfile", new { area = "" }))">
+                            <i class="nav-icon icon-speedometer"></i>Profile
+
+                        </a>
+                    </li>
+                     <li class="nav-item nav-dropdown @((curController == "SchoolWiseReqSummary") ? "open" : "")">
+                        <a class="nav-link nav-dropdown-toggle" href=javascript:void(0);>
+                            <i class="nav-icon icon-puzzle"></i> Report
+                        </a>
+                        <ul class="nav-dropdown-items">
+                           
+                            <li class="nav-item">
+                                <a class="nav-link @((curController == "InstituteList" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "InstituteList", new { area = "" }))">
+                                    <i class="nav-icon icon-puzzle"></i>Institute Details Report
+
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @((curController == "SchoolWiseReqSummary" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "SchoolWiseReqSummary", new { area = "" }))">
+                                    <i class="nav-icon icon-puzzle"></i>School Wise Enrollment Quantity Report - After Institute Confirmation
+
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                }
+            @if (GlobalSettings.oUserMaster.vUserRole == UserRole.TB)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="@(Url.Action("Index", "UserProfile", new { area = "" }))">
+                        <i class="nav-icon icon-speedometer"></i>Profile
+
+                    </a>
+                </li>
+              <li class="nav-item">
+                        <a class="nav-link" href="@(Url.Action("Index", "Challan", new { area = "" }))">
+                            <i class="nav-icon icon-layers"></i>Manage Challan
+
+                        </a>
+              </li>
+               
+                 <li class="nav-item">
+                        <a class="nav-link" href="@(Url.Action("Index", "CancelChallan", new { area = "" }))">
+                            <i class="nav-icon icon-layers"></i>Cancel Challan
+
+                        </a>
+              </li>
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="@(Url.Action("Index", "ChallanXIXII", new { area = "" }))">
+                            <i class="nav-icon icon-layers"></i>Manage Challan for XI-XII
+
+                        </a>
+                    </li>
+                
+                <li class="nav-item">
+                   <a class="nav-link @((curController == "DespatchStatus" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "DespatchStatus", new { area = "" }))">
+                       <i class="nav-icon icon-puzzle"></i>Despatch Status Report
+
+                   </a>
+               </li>
+                <li class="nav-item nav-dropdown @((curController == "Invoice" || curController == "InvoiceView") ? "open" : "")">
+                    <a class="nav-link nav-dropdown-toggle" href=javascript:void(0);>
+                        <i class="nav-icon icon-cloud-download"></i> Manage Invoice
+                    </a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link @((curController == "Invoice" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "Invoice", new { area = "" }))">
+                                <i class="nav-icon icon-cloud-download"></i> New Invoice
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @((curController == "InvoiceView" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "InvoiceView", new { area = "" }))">
+                                <i class="nav-icon icon-cloud-download"></i> Invoice List
+                            </a>
+                        </li>                                             
+                    </ul>
+                </li>
+                <li class="nav-item nav-dropdown @((curController == "SchoolWiseReqSummary") ? "open" : "")">
+                    <a class="nav-link nav-dropdown-toggle" href=javascript:void(0);>
+                        <i class="nav-icon icon-puzzle"></i> Report
+                    </a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link @((curController == "InstituteList" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "InstituteList", new { area = "" }))">
+                                <i class="nav-icon icon-puzzle"></i>Institute Details Report
+
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @((curController == "SchoolWiseReqSummary" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "SchoolWiseReqSummary", new { area = "" }))">
+                                <i class="nav-icon icon-puzzle"></i>School Wise Enrollment Quantity Report
+
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @((curController == "GoodDespatchNotBill" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "GoodDespatchNotBill", new { area = "" }))">
+                                <i class="nav-icon icon-puzzle"></i> Goods Despatch But Not Billed
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+            
+            @if (GlobalSettings.oUserMaster.vUserRole == UserRole.ADMIN)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="@(Url.Action("Index", "UserProfile", new { area = "" }))">
+                        <i class="nav-icon icon-speedometer"></i>Profile
+
+                    </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link @((curController == "ManageBlock" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "ManageBlock", new { area = "" }))">
+                     <i class="nav-icon icon-puzzle"></i>Manage Block
+                   </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link @((curController == "ManageInstitute" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "ManageInstitute", new { area = "" }))">
+                     <i class="nav-icon icon-puzzle"></i>Manage Institute
+                   </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link @((curController == "UpdateMobile" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "UpdateMobile", new { area = "" }))">
+                     <i class="nav-icon icon-puzzle"></i>Update Mobile No
+                   </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link @((curController == "RequisitionUnlock" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "RequisitionUnlock", new { area = "" }))">
+                     <i class="nav-icon icon-puzzle"></i>Requisition Unlock
+                   </a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="@(Url.Action("Index", "RequisitionSPL", new { area = "" }))">
+                            <i class="nav-icon icon-layers"></i>Requisition by SPL
+
+                        </a>
+                </li>
+                
+                <li class="nav-item">
+                        <a class="nav-link" href="@(Url.Action("Index", "RateUpdate", new { area = "" }))">
+                            <i class="nav-icon icon-layers"></i>Rate Update
+
+                        </a>
+                </li>
+                  <li class="nav-item">
+                        <a class="nav-link" href="@(Url.Action("Index", "SMSSend", new { area = "" }))">
+                            <i class="nav-icon icon-layers"></i>SMS Send
+
+                        </a>
+                 </li>
+                
+                 <li class="nav-item nav-dropdown @((curController == "SchoolWiseReqSummary") ? "open" : "")">
+                    <a class="nav-link nav-dropdown-toggle" href=javascript:void(0);>
+                        <i class="nav-icon icon-puzzle"></i> Report
+                    </a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link @((curController == "InstituteList" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "InstituteList", new { area = "" }))">
+                                <i class="nav-icon icon-puzzle"></i>Institute Details Report
+
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @((curController == "SchoolWiseReqSummary" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "SchoolWiseReqSummary", new { area = "" }))">
+                                <i class="nav-icon icon-puzzle"></i>School Wise Enrollment Quantity Report
+
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @((curController == "DespatchStatus" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "DespatchStatus", new { area = "" }))">
+                                <i class="nav-icon icon-puzzle"></i>Despatch Status Report
+
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @((curController == "GoodDespatchNotBill" && curAction == "Index") ? "active" : "")" href="@(Url.Action("Index", "GoodDespatchNotBill", new { area = "" }))">
+                                <i class="nav-icon icon-puzzle"></i> Goods Despatch But Not Billed
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+            <li class="nav-item">
+                <a class="nav-link" href="@(Url.Action("Logout", "Login", new { area = "" }))">
+                    <i class="nav-icon icon-drop"></i> Logout
+
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+</div>
