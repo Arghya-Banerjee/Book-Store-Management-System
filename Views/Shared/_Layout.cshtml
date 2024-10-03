@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @*<base href="./" />*@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
@@ -18,7 +17,6 @@
     <link href="@(Url.VersionedContent("~/icons/simple-line-icons.css"))" rel="stylesheet" />
     <link href="@(Url.VersionedContent("~/css/style.css"))" rel="stylesheet" />
     <link href="@(Url.VersionedContent("~/css/select2.min.css"))" rel="stylesheet" />
-    @*<link href="@(Url.VersionedContent("//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"))" rel="stylesheet" />*@
     <link href="@(Url.VersionedContent("~/css/jquery-ui.css"))" rel="stylesheet" />
     <link href="@(Url.VersionedContent("~/vendors/pace-progress/css/pace.min.css"))" rel="stylesheet" />
 
@@ -31,14 +29,11 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href=javascript:void(0);>
-            @*<img class="navbar-brand-full" src="~/img/book-logo.svg" width="89" height="25" alt="Logo">
-            <img class="navbar-brand-minimized" src="~/img/book-logo.svg" width="30" height="30" alt="Logo">*@
         </a>
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon"></span>
         </button>
        
-            @*<h5 style="color:#152171;">Madrasah</h5>*@
         <h5 style="color:#152171;">Madrasah Book Distribution</h5>
         <ul class="nav navbar-nav ml-auto">
            
@@ -63,11 +58,6 @@
                                 <i class="fa fa-user"></i> Profile
                             </a>
                         }
-                        
-                  
-                        @*<a class="dropdown-item" href="@(Url.Action("ChangePassword", "ResetPassword", new { area = "" }))">
-                            <i class="fa fa-user"></i> Change Password
-                        </a>*@
 
                         <a class="dropdown-item" href="@(Url.Action("Logout", "Login", new { area = "" }))">
                             <i class="fa fa-lock"></i> Logout
