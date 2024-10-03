@@ -540,15 +540,6 @@ namespace webappmvctry.Controllers
                 try
                 {
                     result = DBOperations<Requisition>.DMLOperation(new Requisition() { Opmode = 3, Id = i }, Constant.usp_RequisitionView);
-                    // var reqdtl = DBOperations<Requisition>.GetSpecific(new Requisition() { Opmode = 4, REQUISITION_ID = i }, Constant.uspv3_RequisitionView);
-
-                    //objSend.ID = reqdtl.CIRCLE_ID;
-
-                    //var objCircleProfile = DBOperations<CircleProfile>.GetSpecific(objSend, Constant.uspv3_CircleProfile);
-                    //var MailSubject = "Requisition Confirmation Email- " + reqdtl.REQ_CODE;
-                    //var MailContent = "Sir/Madam, Requisition No. " + reqdtl.REQ_CODE + " has been confirmed successfully";
-                    //Utility.SendSMS(objCircleProfile.MOBILE_NO.ToString(), MailContent);
-                    // Utility.SendHtmlFormattedEmail(objCircleProfile.EMAIL_ID.ToString(), MailSubject, MailContent, false, "");
 
                 }
                 catch (Exception ex)
@@ -567,7 +558,7 @@ namespace webappmvctry.Controllers
             try
             {
 
-                if (MediumId != 4) // not XI-XX
+                if (MediumId != 4)
                 {
                     if (GlobalSettings.oUserMaster.SchoolMedium != 3)
                     {
@@ -674,23 +665,19 @@ namespace webappmvctry.Controllers
 
                 Response.Buffer = false;
                 Response.ClearContent();
-                Response.ClearHeaders();
-                //PortableDocFormat
+                Response.ClearHeaders();]
 
                 Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stream.Seek(0, SeekOrigin.Begin);
                 rd.Close();
                 return File(stream, "application/pdf", filename);
 
-            }
+            } 
             catch (Exception ex)
             {
                 var ERRUSERID = "USER ID - " + GlobalSettings.oUserMaster.UserId;
                 Utility.SaveSystemErrorLog(ex, ERRUSERID);
-                //string path = Path.Combine(Server.MapPath("~/CrystalReports"), "CrystalReport1.rpt");
                 return Json(new { Success = 0, Message = ex.Message + " Report Server Not Avaiable" }, JsonRequestBehavior.AllowGet);
-                //lst = new List<Challan>();
-                //return File("", "application/pdf", "TestCrystalReport.pdf"); 
             }
 
         }
